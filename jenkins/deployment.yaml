@@ -28,7 +28,12 @@ spec:
   selector:
     app: jenkins
   ports:
-    - protocol: TCP
-      port: 8081      # Порт сервиса
-      targetPort: 443 # Порт внутри контейнера
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8081
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8081
   type: ClusterIP # Тип доступа (внутренний IP кластера)
