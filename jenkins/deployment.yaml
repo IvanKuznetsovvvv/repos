@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: jenkins
-        image: dhi.io/jenkins:2.562
+        image: jenkins/jenkins:latest
         ports:
         - containerPort: 80
 ---
