@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-deployment
+  name: jenkins-deployment
   labels:
-    app: my-app
+    app: jenkins
 spec:
   replicas: 2 # Количество запущенных копий приложения
   selector:
     matchLabels:
-      app: my-app
+      app: jenkins
   template:
     metadata:
       labels:
-        app: my-app
+        app: jenkins
     spec:
       containers:
       - name: jenkins
@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app-service
+  name: jenkins-service
 spec:
   selector:
-    app: my-app
+    app: jenkins
   ports:
     - protocol: TCP
       port: 80      # Порт сервиса
