@@ -6,13 +6,13 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: argo.locals # Домен, по которому будете заходить
+    - host: argo.test.local # Домен, по которому будете заходить
       http:
         paths:
           - path: /argo
             pathType: Prefix
             backend:
               service:
-                name: argocd-repo-server
+                name: argocd-server
                 port:
                   number: 8080
