@@ -3,10 +3,6 @@ kind: Ingress
 metadata:
   name: argocd-server-ingress
   namespace: argocd # Обязательно тот же, где установлен Argo CD
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    # Если используете https внутри Argo (по умолчанию):
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   rules:
     - host: argo.test.local # Ваш домен
