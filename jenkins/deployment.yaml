@@ -62,7 +62,7 @@ spec:
     app: jenkins
   ports:
     - name: http
-      port: 443
+      port: 80
       targetPort: 8080
     - name: jnlp
       port: 50000

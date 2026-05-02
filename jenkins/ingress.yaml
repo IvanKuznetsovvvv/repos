@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
   annotations:
     # ГЛАВНОЕ: сообщаем Ingress, что бэкенд ждет HTTPS
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     # Разрешаем самоподписанные сертификаты Argo
     nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
     # Отключаем ограничение на размер загружаемых файлов
@@ -21,4 +21,4 @@ spec:
               service:
                 name: jenkins-service
                 port:
-                  number: 443 # Используйте 443 порт для HTTPS связи внутри кластера
+                  number: 80 # Используйте 443 порт для HTTPS связи внутри кластера
