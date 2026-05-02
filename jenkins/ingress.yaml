@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: jenkins-service-ingress
-  namespace: argocd
+  namespace: jenkins
   annotations:
     # ГЛАВНОЕ: сообщаем Ingress, что бэкенд ждет HTTPS
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
