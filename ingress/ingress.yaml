@@ -9,7 +9,7 @@ spec:
     - host: argo.test.local # Домен, по которому будете заходить
       http:
         paths:
-          - path: /argo
+          - path: /
             pathType: Prefix
             backend:
               service:
