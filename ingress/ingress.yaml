@@ -1,18 +1,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: example-ingress
+  name: argocd-server-ingress
+  namespace: argocd # Обязательно тот же, где установлен Argo CD
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    # Если используете https внутри Argo (по умолчанию):
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   rules:
-    - host: argo.test.local # Домен, по которому будете заходить
+    - host: argo.test.local # Ваш домен
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: argocd-server
+                name: argocd-server # Имя основного сервиса Argo
                 port:
-                  number: 8080
+                  number: 443
