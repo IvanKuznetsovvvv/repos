@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    tools {
+        // Укажите имя Maven, которое настроено в Manage Jenkins -> Tools
+        maven 'M3' 
+    }
+
+    environment {
+        DOCKER_HUB_USER = 'vash_login_dockerhub'
+        REPO_NAME       = 'calc-back'
+    }
+
+    stages {
+        // 1. Скачиваем код
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    credentialsId: 'github-token',
+                    url: 'https://github.com'
+            }
+        }
+
+        // 2. Собираем Java проект в JAR
+        stage('Maven Build') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+
+        // 3. Собираем Docker образ и пушим
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    // Используем Dockerfile, который мы создали ранее
+                    def customImage = docker.build("${DOCKER_HUB_USER}/${REPO_NAME}:${env.BUILD_NUMBER}")
+                    
+                    // Логинимся и отправляем
+                    docker.withRegistry('https://docker.io', 'dockerhub-credentials') {
+                        customImage.push()
+                        customImage.push('latest') // Дублируем как latest
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Очистка рабочего пространства после сборки
+            cleanWs()
+        }
+    }
+}
