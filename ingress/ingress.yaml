@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: hello-world.info # Домен, по которому будете заходить
+    - host: argo.locals # Домен, по которому будете заходить
       http:
         paths:
           - path: /argo
